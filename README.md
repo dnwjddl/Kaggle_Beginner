@@ -26,4 +26,9 @@ MAP@7(Mean Average Precision @ 7) :
 - 예측의 순서에 매우 예민한 평가 척도 (앞쪽에 예측하는 것이 더 좋은 점수를 받음)
 
 ### 데이터 전처리
+Tabular 형태의 시계열(Time-Series)데이터 제공
+
 ### 피처 엔지니어링
+Tabular 형태의 시계열 데이터일 경우 딥러닝 모델 보다 트리 기반의 앙상블 모델이 더 좋은 성능 - 시계열 데이터는 과거 데이터를 활용하는 lag 데이터를 파생변수로 생성 <br>
+scikit-learn 라이브러리에서 DecisionTree, RandomForest, ExtraTrees, AdaBoost, GradientBoosting 모델 지원 <br>
+가장 많이 사용하는 모델 **XGBoost & LightGBM**
