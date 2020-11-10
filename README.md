@@ -20,4 +20,4 @@
 - 지난 달에 보유하고 있는 제품을 이번 달에 해지하는 것 또한 신규 구매로 취급하지 않음
 
 ### 평가 척도
-MAP@7(Mean Average Precision @ 7)
+MAP@7(Mean Average Precision @ 7) : 모든 예측 결과물의 Average Precision의 평균 값, @7은 최대 7개의 금융제품 예측
