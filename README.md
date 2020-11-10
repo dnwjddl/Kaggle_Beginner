@@ -14,6 +14,19 @@
 6. 앙상블
   - 다수의 모델 사용
   
+
+#### kaggle api 설치
+```python
+pip install kaggle
+kaggle competitions list
+```
+#### kaggle api에 api키 등록
+#### 필요한 데이터 다운로드
+```python
+kaggle competitions download -c [competition name]
+pip install -r kaggle_[competition_name]/requirements.txt
+```
+  
 ## 산탄데르 제품 추천 경진대회
 https://www.kaggle.com/c/santander-product-recommendation
 
