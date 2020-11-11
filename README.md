@@ -32,7 +32,7 @@ https://www.kaggle.com/c/santander-product-recommendation
 
 **고객이 신규로 구매할 제품이 무엇인지** 예측
 - 이미 보유하고 있는 제품은 신규 구매로 취급하지 않음
-- 지난 달에 보유하고 있는 제품을 이번 달에 해지하는 것 또한 신규 구매로 취급하지 않음
+- 지난 달에 보유하고 있는 제품을 이번 달에 해지하는 것 또한 신규 구매로 취급하지 않음 
 
 ### 평가 척도 - mapk.py
 MAP@7(Mean Average Precision @ 7) :
