@@ -100,5 +100,24 @@ XY['y'] = Y
 |:------|:-------:|:-----------:|
 |max_depth|트리 모델의 최대 깊이|값이 높을 수록 복잡한 트리 모델, 과적합의 원인|
 |eta|learning rate와 같은 개념. 0과 1사이의 값|값이 너무 높으면 학습이 잘 되지 않으며, 너무 낮으면 학습이 느려짐|
-|colsample_bytree|트리 생성할 때 훈련 데이터에서 변수를 샘플링해주는 비율.  모든 트리는 전체 변수의 일부만을 학습하여 서로의 약점을 보완| 보통 0.6~0.9 사용
-|colsample_bylevel|트리의 레벨 별로 훈련 데이터의 변수를 샘플링해주는 비율| 보통 0.6~0.9 사용
+|colsample_bytree|트리 생성할 때 훈련 데이터에서 변수를 샘플링해주는 비율.  모든 트리는 전체 변수의 일부만을 학습하여 서로의 약점을 보완| 보통 0.6~0.9 사용|
+|colsample_bylevel|트리의 레벨 별로 훈련 데이터의 변수를 샘플링해주는 비율| 보통 0.6~0.9 사용|
+
+**파라미터 튜닝 작업에 많은 시간을 쏟지 말고 피처 엔지니어링에 더 많은 시간을 쏟을 것을 권장한다**  
+적당한 수준의 피처 엔지니어링을 통해 얻은 변수와 엄청난 수준의 파라미터 튜닝을 통해 얻은 하나의 완벽한 모델보다, 적당한 수준의 파라미터 튜닝을 진행한 모델과 많은 시간을 피처 엔지니어링에 투자하여 얻어낸 양질의 변수를 학습한 모델이 보편적으로 더 좋은 성능을 보임
+
+- XGBoost 형태  
+```python
+# 훈련, 검증 데이터를 XGBoost 형태로 변환한다.
+X_trn = XY_trn[features].values
+Y_trn = XY_trn['y'].values
+dtrn = xgb.DMatrix(X_trn, label=Y_trn, feature_names=features)
+
+X_vld = XY_vld[features].values
+Y_vld = XY_vld['y'].values
+dvld = xgb.DMatrix(X_vld, label=Y_vld, feature_names=features)
+
+# XGBoost 모델을 훈련 데이터로 학습한다
+watch_list = [(dtrn, 'train'), (dvld, 'eval')]
+model = xgb.train(param, dtrn, num_boost_round=1000, evals=watch_list, early_stopping_rounds=20)
+```
