@@ -128,5 +128,6 @@ model = xgb.train(param, dtrn, num_boost_round=1000, evals=watch_list, early_sto
 # 학습한 모델을 저장한다.
 import pickle
 pickle.dump(model, open("./model/xgb.baseline.pkl", "wb"))
-best_ntree_limit = model.best_ntree_limit #early stopping
+best_ntree_limit = model.best_ntree_limit 
+#early stopping
 ```
