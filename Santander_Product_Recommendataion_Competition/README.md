@@ -40,7 +40,7 @@ df = pd.concat([trn, tst], axis=0)
 ✔ .factorize()을 하면 label encoding을 얻을 수 있음. 출력값으로는 encoding 된 값과 class의 값들이 나온다.
 
 
-### 피처 엔지니어링
+## 피처 엔지니어링 (파생변수 생성)
 
 - 년도와 월 정보 추출
 
@@ -78,5 +78,26 @@ print(features)
 ```
 
 ## 모델 학습
+- **교차검증**을 위한 데이터분리
+    - 신규 구매 건수만 추출
+    
+```python
+for i, prod in enumerate(prods):
+    prev = prod + '_prev'
+    prX = trn[(trn[prod] == 1) & (trn[prev] == 0)]
+    prY = np.zeros(prX.shape[0], dtype=np.int8) + i
+    X.append(prX)
+    Y.append(prY)
+XY = pd.concat(X)
+Y = np.hstack(Y)
+XY['y'] = Y
+```
 
-
+- 모델 : XGBoost
+```XGBoost``` 파라미터 설명
+| 파라미터 | 설명 | 비고 |
+|------|-----------|-----------|
+|max_depth|트리 모델의 최대 깊이|값이 높을 수록 복잡한 트리 모델>과적합의 원인|
+|eta|learning rate와 같은 개념. 0과 1사이의 값|값이 너무 높으면 학습이 잘 되지 않으며, 너무 낮으면 학습이 느려짐|
+|colsample_bytree|트리 생성할 때 훈련 데이터에서 변수를 샘플링해주는 비율. 모든 트리는 전체 변수의 일부만을 학습하여 서로의 약점을 보완| 보통 0.6~0.9 사용
+|colsample_bylevel|트리의 레벨 별로 훈련 데이터의 변수를 샘플링해주는 비율| 보통 0.6~0.9 사용
